@@ -3,8 +3,6 @@
 namespace App\Controller\Api;
 
 use App\Exception\TagTextException;
-use App\Service\Company\Exception\CompanyNotFoundException;
-use App\Service\Company\CompanyFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,8 +38,7 @@ class TagTextController extends AbstractController
 
     private function getTagArrResult(string $tagText): ?array
     {
-        if (preg_match_all('/\[([^\s]+)(.*)\]([\s\S]+?)\[\/\1\]/', $tagText,$tagArrResutl) === false || count($tagArrResutl) < 4)
-        {
+        if (preg_match_all('/\[([^\s]+)(.*)\]([\s\S]+?)\[\/\1\]/', $tagText, $tagArrResutl) === false || count($tagArrResutl) < 4) {
             throw new TagTextException();
         }
 
@@ -54,7 +51,7 @@ class TagTextController extends AbstractController
     {
         $tagTextArray = [];
 
-        foreach ($tagArrResult as $result){
+        foreach ($tagArrResult as $result) {
             $tagTextArray [] = [$result[1] => $result[3]];
         }
 
@@ -65,8 +62,8 @@ class TagTextController extends AbstractController
     {
         $tagDescriptionArray = [];
 
-        foreach ($tagArrResult as $result){
-            if ($result[2] !== ''){
+        foreach ($tagArrResult as $result) {
+            if ($result[2] !== '') {
                 $tagDescriptionArray [] = [$result[1] => preg_replace('/ description=”(.*)”/', '$1', $result[2])];
             }
         }

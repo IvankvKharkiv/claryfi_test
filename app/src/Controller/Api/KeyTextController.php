@@ -2,9 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Exception\KeyTextException;
-use App\Service\Company\Exception\CompanyNotFoundException;
-use App\Service\Company\CompanyFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,10 +35,9 @@ class KeyTextController extends AbstractController
     private function getKeyTextArray(string $keyText): ?array
     {
         $result = [];
-        foreach (self::KEYS as $key){
-            preg_match_all($this->getRegExpForKey($key), $keyText,$keyArrResutl);
-            if (count($keyArrResutl[2]) !== 0)
-            {
+        foreach (self::KEYS as $key) {
+            preg_match_all($this->getRegExpForKey($key), $keyText, $keyArrResutl);
+            if (count($keyArrResutl[2]) !== 0) {
                 $result [$key] = $keyArrResutl[2][count($keyArrResutl[2]) > 0 ? count($keyArrResutl[2]) - 1 : 0];
             }
         }
