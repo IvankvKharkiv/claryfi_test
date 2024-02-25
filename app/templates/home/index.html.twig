@@ -22,8 +22,26 @@
 
         <div>
             <textarea type="text" v-model="tagText" name="tagText" style="width: 500px; height: 300px;"></textarea>
-            <button type="button" v-on:click="analyzeTagText">Calculate</button>
-            <p>Tag Text Processing Result: <b>${ tag_text_result }$</b></p>
+            <button type="button" v-on:click="analyzeTagText">Get Tag Text Result</button>
+            <p>Tag Text Processing Result</p>
+            <p>Tag Text Results:</p>
+            <p v-for="tag_text_result_single in tag_text_result">
+                ${ tag_text_result_single }$
+            </p>
+            <p>Tag Description Results:</p>
+            <p v-for="tag_description_result_single in tag_description_result">
+                ${ tag_description_result_single }$
+            </p>
+        </div>
+
+
+        <div>
+            <textarea type="text" v-model="keyText" name="keyText" style="width: 500px; height: 300px;"></textarea>
+            <button type="button" v-on:click="analyzeKeyText">Get Key Text Result</button>
+            <p>Key Text Processing Result:</p>
+            <p v-for="(value, name, index) in key_text_result">
+                ${ name }$ ${ value }$
+            </p>
         </div>
 
 

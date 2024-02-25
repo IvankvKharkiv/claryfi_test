@@ -10,9 +10,12 @@ new Vue({
         selected: 'trans_company',
         weight: 1,
         tagText: 'tagText',
-        tag_text_result: 'No result yet.',
+        tag_text_result: [],
+        tag_description_result: [],
         errors_show: false,
-        errors_text: ''
+        errors_text: '',
+        keyText: 'keyText',
+        key_text_result: []
     },
     delimiters: ['${', '}$'],
     methods: {
@@ -35,8 +38,30 @@ new Vue({
             axios.post('/api/tag-text', {
                 tagtext: this.tagText,
             })
-                .then(response => (this.delivery_cost = response.data.delivery_cost))
-                .catch(error => console.log(error));
+                .then(response => {
+                    this.tag_text_result = response.data.tag_text;
+                    this.tag_description_result = response.data.tag_description;
+                    this.errors_show = false;
+                })
+                .catch((error) => {
+                    this.errors_text = error.response.data.message;
+                    this.errors_show = true;
+                    console.log(error.message);
+                });
+        },
+        analyzeKeyText: function () {
+            axios.post('/api/key-text', {
+                keyText: this.keyText,
+            })
+                .then(response => {
+                    this.key_text_result = response.data.key_text;
+                    this.errors_show = false;
+                })
+                .catch((error) => {
+                    this.errors_text = error.response.data.message;
+                    this.errors_show = true;
+                    console.log(error.message);
+                });
         }
     }
 });
