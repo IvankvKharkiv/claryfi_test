@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div id="app">
+        <div>
+            <p v-if="errors_show" style="color: red">${ errors_text }$</p>
+            <select v-model="selected" name="company">
+                {% for companyKey, company in constant('App\\Service\\Company\\CompanyFactory::COMPANY_CHOISES') %}
+                    <option value="{{ companyKey }}">
+                        {{ company }}
+                    </option>
+                {% endfor %}
+                <option value="{{ constant('App\\Service\\Company\\CompanyFactory::WRONG_COMPANY_FOR_ERROR_CHECK') }}">
+                    Wrong Company For Error Check
+                </option>
+            </select>
+            <input type="text" v-model="weight" name="weight">
+            <button type="button" v-on:click="submitForm">Calculate</button>
+            <p>Delivery cost: <b>${ delivery_cost }$</b></p>
+        </div>
+
+        <div>
+            <textarea type="text" v-model="tagText" name="tagText" style="width: 500px; height: 300px;"></textarea>
+            <button type="button" v-on:click="analyzeTagText">Calculate</button>
+            <p>Tag Text Processing Result: <b>${ tag_text_result }$</b></p>
+        </div>
+
+
+    </div>
+
+{% endblock %}
