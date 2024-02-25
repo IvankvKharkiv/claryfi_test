@@ -7,4 +7,5 @@ To get into fpm container 'docker exec -it claryfi_test-fpm-1 bash' <br/>
 cd app, yarn install, yarn build or yarn watch <br/>
 You'll see your app on http://claryfi_test.com/ (not https://claryfi_test.com/)<br/>
 
+![img.png](img.png)
 
