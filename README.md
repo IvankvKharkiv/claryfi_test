@@ -15,7 +15,7 @@ Very rarely but if you on Ubuntu sometimes you eve need to restart it and then r
 Put '127.0.0.1       claryfi_test.com' into /etc/hosts. <br/>
 To get into fpm container 'docker exec -it claryfi_test-fpm-1 bash' <br/>
 cd app, yarn install, yarn build or yarn watch <br/>
-You'll see your app on http://claryfi_test.com/ (not https://claryfi_test.com/)<br/>
+You'll see your app on http://claryfi_test.com/home (not https://claryfi_test.com/home)<br/>
 
 ![img.png](img.png)
 
